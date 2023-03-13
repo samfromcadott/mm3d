@@ -1,16 +1,10 @@
 #include <math.h>       // Required for: sinf(), cosf()
 #include <raylib.h>
 
-const Color sky_color = {106, 173, 253, 255};
+#include "globals.hh"
 
 int main() {
 	// Initialization
-	const int screen_width_internal = 320;
-	const int screen_height_internal = 240;
-
-	const int screen_width = screen_width_internal * 3;
-	const int screen_height = screen_height_internal * 3;
-
 	const float virtual_ratio = (float)screen_width/(float)screen_width_internal;
 
 	InitWindow(screen_width, screen_height, "Mountain Mayhem 3D");
