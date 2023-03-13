@@ -1,0 +1,8 @@
+*.dll
+lib*.a
+*.exe
+lib
+include
+*.o
+.sconsign.dblite
+*.zip
