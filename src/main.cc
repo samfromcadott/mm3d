@@ -1,8 +1,9 @@
-#include <math.h>       // Required for: sinf(), cosf()
 #include <raylib.h>
 #include <rlgl.h>
+#include <raymath.h>
 
 #include "globals.hh"
+#include "player.hh"
 
 int main() {
 	// Initialization
@@ -41,11 +42,21 @@ int main() {
 	Texture2D background = LoadTexture("assets/graphics/mountain.png");
 	Texture2D gravel = LoadTexture("assets/graphics/road.png");
 	Texture2D trees = LoadTexture("assets/graphics/trees.png");
+	Texture2D grass = LoadTexture("assets/graphics/grass.png");
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
+	// Create the player
+	Player player;
+	player.position = {0.0, 0.0, 1.5};
+
 	// Main game loop
 	while ( !WindowShouldClose() ) {
+		// Update
+		player.update();
+		camera.position = player.position;
+		camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
+
 		// Draw
 		BeginTextureMode(render_target);
 			// Draw the background
@@ -68,6 +79,16 @@ int main() {
 					rlVertex3f(-4.0, 8.0, 0.0);
 					rlTexCoord2f(-1.0, 0.0);
 					rlVertex3f(-4.0, 0.0, 0.0);
+
+					rlSetTexture(grass.id);
+					rlTexCoord2f(+1.0, 0.0);
+					rlVertex3f(-4.0, 0.0, 0.0);
+					rlTexCoord2f(+1.0, 8.0);
+					rlVertex3f(-4.0, 8.0, 0.0);
+					rlTexCoord2f(-1.0, 8.0);
+					rlVertex3f(-8.0, 8.0, 0.0);
+					rlTexCoord2f(-1.0, 0.0);
+					rlVertex3f(-8.0, 0.0, 0.0);
 
 					rlSetTexture(trees.id);
 					rlTexCoord2f(2.0, 1.0);
