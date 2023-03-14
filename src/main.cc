@@ -1,5 +1,6 @@
 #include <math.h>       // Required for: sinf(), cosf()
 #include <raylib.h>
+#include <rlgl.h>
 
 #include "globals.hh"
 
@@ -17,8 +18,10 @@ int main() {
 
 	// Define the camera to look into our 3d world
 	Camera3D camera = { 0 };
-	camera.position = (Vector3){ 10.0, 10.0, 10.0 };  // Camera position
-	camera.target = (Vector3){ 0.0, 0.0, 0.0 };      // Camera looking at point
+	// camera.position = (Vector3){ 3.0, -3.0, 3.0 };  // Camera position
+	// camera.target = (Vector3){ 0.0, 0.0, 0.0 };      // Camera looking at point
+	camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
+	camera.target = (Vector3){ -2.0, 1.0, 1.5 };     // Camera looking at point
 	camera.up = (Vector3){ 0.0, 0.0, 1.0 };          // Camera up vector (rotation towards target)
 	camera.fovy = 90.0;                                // Camera field-of-view Y
 	camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
@@ -37,6 +40,9 @@ int main() {
 	// Load the textures
 	Texture2D background = LoadTexture("assets/graphics/mountain.png");
 	Texture2D gravel = LoadTexture("assets/graphics/road.png");
+	Texture2D trees = LoadTexture("assets/graphics/trees.png");
+	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
+	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
@@ -48,7 +54,33 @@ int main() {
 
 
 			BeginMode3D(camera);
-				DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
+				// DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
+
+				rlBegin(RL_QUADS);
+					rlColor4f(1.0, 1.0, 1.0, 1.0);
+
+					rlSetTexture(gravel.id);
+					rlTexCoord2f(+1.0, 0.0);
+					rlVertex3f(0.0, 0.0, 0.0);
+					rlTexCoord2f(+1.0, 8.0);
+					rlVertex3f(0.0, 8.0, 0.0);
+					rlTexCoord2f(-1.0, 8.0);
+					rlVertex3f(-4.0, 8.0, 0.0);
+					rlTexCoord2f(-1.0, 0.0);
+					rlVertex3f(-4.0, 0.0, 0.0);
+
+					rlSetTexture(trees.id);
+					rlTexCoord2f(2.0, 1.0);
+					rlVertex3f(-8.0, +8.0, 0.0);
+					rlTexCoord2f(2.0, 0.0);
+					rlVertex3f(-8.0, +8.0, 6.0);
+					rlTexCoord2f(0.0, 0.0);
+					rlVertex3f(-8.0, 0.0, 6.0);
+					rlTexCoord2f(0.0, 1.0);
+					rlVertex3f(-8.0, 0.0, 0.0);
+				rlEnd();
+
+				rlSetTexture(0);
 			EndMode3D();
 		EndTextureMode();
 
