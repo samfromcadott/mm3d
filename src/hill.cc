@@ -47,14 +47,14 @@ void Hill::render_segment(Segment& s) {
 	rlTexCoord2f(2.0, 0.0);
 	rlVertex3f(-road_width-grass_width, s.end.y, s.end.z+tree_height);
 	rlTexCoord2f(0.0, 0.0);
-	rlVertex3f(-road_width-grass_width, s.start.y, s.end.z+tree_height);
+	rlVertex3f(-road_width-grass_width, s.start.y, s.start.z+tree_height);
 	rlTexCoord2f(0.0, 1.0);
 	rlVertex3f(-road_width-grass_width, s.start.y, s.start.z);
 
 	rlTexCoord2f(0.0, 1.0);
 	rlVertex3f(grass_width, s.start.y, s.start.z);
 	rlTexCoord2f(0.0, 0.0);
-	rlVertex3f(grass_width, s.start.y, s.end.z+tree_height);
+	rlVertex3f(grass_width, s.start.y, s.start.z+tree_height);
 	rlTexCoord2f(2.0, 0.0);
 	rlVertex3f(grass_width, s.end.y, s.end.z+tree_height);
 	rlTexCoord2f(2.0, 1.0);
@@ -97,6 +97,7 @@ int Hill::current_segment() {
 void Hill::add_segment() {
 	Segment new_segment;
 	new_segment.start = segments.back().end;
-	new_segment.end = Vector3Add(new_segment.start, {0.0, segment_length, 0.0});
+	float drop = -GetRandomValue(0, segment_length);
+	new_segment.end = Vector3Add(new_segment.start, {0.0, segment_length, drop});
 	segments.push_back(new_segment);
 }
