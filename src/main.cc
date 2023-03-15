@@ -4,6 +4,12 @@
 
 #include "globals.hh"
 #include "player.hh"
+#include "hill.hh"
+
+Texture2D background;
+Texture2D gravel;
+Texture2D trees;
+Texture2D grass;
 
 int main() {
 	// Initialization
@@ -19,10 +25,10 @@ int main() {
 
 	// Define the camera to look into our 3d world
 	Camera3D camera = { 0 };
-	// camera.position = (Vector3){ 3.0, -3.0, 3.0 };  // Camera position
-	// camera.target = (Vector3){ 0.0, 0.0, 0.0 };      // Camera looking at point
-	camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
-	camera.target = (Vector3){ -2.0, 1.0, 1.5 };     // Camera looking at point
+	camera.position = (Vector3){ -2.0, -8.0, 8.0 };  // Camera position
+	camera.target = (Vector3){ -2.0, 0.0, 0.0 };      // Camera looking at point
+	// camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
+	// camera.target = (Vector3){ -2.0, 1.0, 1.5 };     // Camera looking at point
 	camera.up = (Vector3){ 0.0, 0.0, 1.0 };          // Camera up vector (rotation towards target)
 	camera.fovy = 90.0;                                // Camera field-of-view Y
 	camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
@@ -39,16 +45,20 @@ int main() {
 	SetTargetFPS(60);
 
 	// Load the textures
-	Texture2D background = LoadTexture("assets/graphics/mountain.png");
-	Texture2D gravel = LoadTexture("assets/graphics/road.png");
-	Texture2D trees = LoadTexture("assets/graphics/trees.png");
-	Texture2D grass = LoadTexture("assets/graphics/grass.png");
+	background = LoadTexture("assets/graphics/mountain.png");
+	gravel = LoadTexture("assets/graphics/road.png");
+	trees = LoadTexture("assets/graphics/trees.png");
+	grass = LoadTexture("assets/graphics/grass.png");
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
 	// Create the player
 	Player player;
-	player.position = {0.0, 0.0, 1.5};
+	player.position = {-2.0, 0.0, 1.5};
+
+	// Create the hill
+	Hill hill;
+	hill.segments = { {{0.0, 0.0, 0.0}, {0.0, 8.0, 0.0}} };
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
@@ -66,42 +76,7 @@ int main() {
 
 			BeginMode3D(camera);
 				// DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
-
-				rlBegin(RL_QUADS);
-					rlColor4f(1.0, 1.0, 1.0, 1.0);
-
-					rlSetTexture(gravel.id);
-					rlTexCoord2f(+1.0, 0.0);
-					rlVertex3f(0.0, 0.0, 0.0);
-					rlTexCoord2f(+1.0, 8.0);
-					rlVertex3f(0.0, 8.0, 0.0);
-					rlTexCoord2f(-1.0, 8.0);
-					rlVertex3f(-4.0, 8.0, 0.0);
-					rlTexCoord2f(-1.0, 0.0);
-					rlVertex3f(-4.0, 0.0, 0.0);
-
-					rlSetTexture(grass.id);
-					rlTexCoord2f(+1.0, 0.0);
-					rlVertex3f(-4.0, 0.0, 0.0);
-					rlTexCoord2f(+1.0, 8.0);
-					rlVertex3f(-4.0, 8.0, 0.0);
-					rlTexCoord2f(-1.0, 8.0);
-					rlVertex3f(-8.0, 8.0, 0.0);
-					rlTexCoord2f(-1.0, 0.0);
-					rlVertex3f(-8.0, 0.0, 0.0);
-
-					rlSetTexture(trees.id);
-					rlTexCoord2f(2.0, 1.0);
-					rlVertex3f(-8.0, +8.0, 0.0);
-					rlTexCoord2f(2.0, 0.0);
-					rlVertex3f(-8.0, +8.0, 6.0);
-					rlTexCoord2f(0.0, 0.0);
-					rlVertex3f(-8.0, 0.0, 6.0);
-					rlTexCoord2f(0.0, 1.0);
-					rlVertex3f(-8.0, 0.0, 0.0);
-				rlEnd();
-
-				rlSetTexture(0);
+				hill.render();
 			EndMode3D();
 		EndTextureMode();
 

@@ -1,9 +1,11 @@
 #include <raylib.h>
+#include <raymath.h>
 
 #include "player.hh"
 
 void Player::update() {
 	steer();
+	position = Vector3Add(position, {0.0, GetFrameTime(), 0.0});
 }
 
 void Player::steer() {

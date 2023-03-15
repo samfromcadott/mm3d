@@ -4,7 +4,7 @@
 
 class Player {
 private:
-	float steer_speed = 2.0;
+	float steer_speed = 3.0;
 
 	void steer();
 
