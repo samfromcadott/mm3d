@@ -14,11 +14,13 @@ private:
 	float segment_length = 8.0;
 
 	void render_segment(Segment& s);
+	void add_segment();
 
 public:
 	std::vector<Segment> segments;
 
 	void render();
+	void update();
 	float get_height(float y); // Elevation at position y
 	int current_segment(); // Index of segment the player is on
 };

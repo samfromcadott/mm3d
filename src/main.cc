@@ -11,6 +11,9 @@ Texture2D gravel;
 Texture2D trees;
 Texture2D grass;
 
+Player player;
+Hill hill;
+
 int main() {
 	// Initialization
 	const float virtual_ratio = (float)screen_width/(float)screen_width_internal;
@@ -53,17 +56,22 @@ int main() {
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
 	// Create the player
-	Player player;
+	// Player player;
 	player.position = {-2.0, 0.0, 1.5};
 
 	// Create the hill
-	Hill hill;
-	hill.segments = { {{0.0, 0.0, 0.0}, {0.0, 8.0, 0.0}} };
+	// Hill hill;
+	hill.segments = {
+		{{0.0, 0.0, 0.0}, {0.0, 8.0, 0.0}},
+		{{0.0, 8.0, 0.0}, {0.0, 16.0, 0.0}},
+		{{0.0, 16.0, 0.0}, {0.0, 24.0, 0.0}}
+	};
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
 		// Update
 		player.update();
+		hill.update();
 		camera.position = player.position;
 		camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
 

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <raylib.h>
 #include <raymath.h>
@@ -5,6 +6,7 @@
 
 #include "globals.hh"
 #include "hill.hh"
+#include "player.hh"
 
 void Hill::render_segment(Segment& s) {
 	// Road
@@ -62,11 +64,33 @@ void Hill::render_segment(Segment& s) {
 void Hill::render() {
 	rlBegin(RL_QUADS);
 		rlColor4f(1.0, 1.0, 1.0, 1.0);
-		render_segment( segments[0] );
-		// for (size_t i = current_segment(); i < current_segment()+3; i++) {
-		// 	render_segment( segments[i] );
-		// }
+		for (size_t i = current_segment(); i < current_segment()+4; i++) {
+			Segment& s = segments[i];
+			render_segment( s );
+		}
 	rlEnd();
 
 	rlSetTexture(0);
+}
+
+void Hill::update() {
+	// Check if the player if close to the end
+	if ( current_segment() >= segments.size() - 3 )
+		add_segment();
+}
+
+
+float Hill::get_height(float y) {
+	return 0;
+}
+
+int Hill::current_segment() {
+	return int(player.position.y / segment_length);
+}
+
+void Hill::add_segment() {
+	Segment new_segment;
+	new_segment.start = segments.back().end;
+	new_segment.end = Vector3Add(new_segment.start, {0.0, segment_length, 0.0});
+	segments.push_back(new_segment);
 }
