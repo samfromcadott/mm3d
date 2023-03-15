@@ -64,7 +64,7 @@ void Hill::render_segment(Segment& s) {
 void Hill::render() {
 	rlBegin(RL_QUADS);
 		rlColor4f(1.0, 1.0, 1.0, 1.0);
-		for (size_t i = current_segment(); i < current_segment()+4; i++) {
+		for (size_t i = current_segment(); i < current_segment()+look_ahead; i++) {
 			Segment& s = segments[i];
 			render_segment( s );
 		}
@@ -75,13 +75,19 @@ void Hill::render() {
 
 void Hill::update() {
 	// Check if the player if close to the end
-	if ( current_segment() >= segments.size() - 3 )
+	if ( current_segment() >= segments.size() - (look_ahead-1) )
 		add_segment();
 }
 
 
 float Hill::get_height(float y) {
-	return 0;
+	int index = current_segment(); // Index of current segment
+	Segment& s = segments[index];
+	float t = (y - index * segment_length) / segment_length; // Proportional distance to next segment
+
+	// Lerp between the height of this segment and the next one
+	float z = Lerp(s.start.z, s.end.z, t);
+	return z;
 }
 
 int Hill::current_segment() {

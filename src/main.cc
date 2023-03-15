@@ -57,14 +57,14 @@ int main() {
 
 	// Create the player
 	// Player player;
-	player.position = {-2.0, 0.0, 1.5};
+	// player.position = {-2.0, 0.0, 1.5};
 
 	// Create the hill
 	// Hill hill;
 	hill.segments = {
 		{{0.0, 0.0, 0.0}, {0.0, 8.0, 0.0}},
 		{{0.0, 8.0, 0.0}, {0.0, 16.0, 0.0}},
-		{{0.0, 16.0, 0.0}, {0.0, 24.0, 0.0}}
+		{{0.0, 16.0, 0.0}, {0.0, 24.0, 1.0}}
 	};
 
 	// Main game loop

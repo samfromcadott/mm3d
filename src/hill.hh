@@ -12,6 +12,7 @@ private:
 	float tree_height = 6.0;
 	float grass_width = 2.0;
 	float segment_length = 8.0;
+	int look_ahead = 4; // Number of segments to render
 
 	void render_segment(Segment& s);
 	void add_segment();
