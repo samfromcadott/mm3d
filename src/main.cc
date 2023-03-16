@@ -13,6 +13,7 @@ Texture2D grass;
 
 Player player;
 Hill hill;
+Camera3D camera;
 
 int main() {
 	// Initialization
@@ -27,7 +28,7 @@ int main() {
 	screenSpaceCamera.zoom = 1.0f;
 
 	// Define the camera to look into our 3d world
-	Camera3D camera = { 0 };
+	camera = { 0 };
 	camera.position = (Vector3){ -2.0, -8.0, 8.0 };  // Camera position
 	camera.target = (Vector3){ -2.0, 0.0, 0.0 };      // Camera looking at point
 	// camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
@@ -55,25 +56,13 @@ int main() {
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
-	// Create the player
-	// Player player;
-	// player.position = {-2.0, 0.0, 1.5};
-
-	// Create the hill
-	// Hill hill;
-	hill.segments = {
-		{{0.0, 0.0, 0.0}, {0.0, 8.0, 0.0}},
-		{{0.0, 8.0, 0.0}, {0.0, 16.0, 0.0}},
-		{{0.0, 16.0, 0.0}, {0.0, 24.0, 0.0}}
-	};
-
 	// Main game loop
 	while ( !WindowShouldClose() ) {
 		// Update
 		player.update();
 		hill.update();
-		camera.position = player.position;
-		camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
+		// camera.position = player.position;
+		// camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
 
 		// Draw
 		BeginTextureMode(render_target);

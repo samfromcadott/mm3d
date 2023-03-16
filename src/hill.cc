@@ -8,6 +8,13 @@
 #include "hill.hh"
 #include "player.hh"
 
+Hill::Hill() {
+	segments = { {{0.0, 0.0, 0.0}, {0.0, segment_length, 0.0}} };
+	for (int i = 0; i < look_ahead; i++) {
+		add_segment();
+	}
+}
+
 void Hill::render_segment(Segment& s) {
 	// Road
 	rlSetTexture(gravel.id);

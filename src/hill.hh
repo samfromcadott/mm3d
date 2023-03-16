@@ -24,4 +24,6 @@ public:
 	void update();
 	float get_height(float y); // Elevation at position y
 	int current_segment(); // Index of segment the player is on
+
+	Hill();
 };
