@@ -71,7 +71,8 @@ int main() {
 		BeginTextureMode(render_target);
 			// Draw the background
 			ClearBackground(sky_color);
-			DrawTexture(background, 0, 0, WHITE);
+			int background_offset = Lerp( 0, -background.height, hill.get_slope(hill.current_segment()) );
+			DrawTexture(background, 0, background_offset/2, WHITE);
 
 
 			BeginMode3D(camera);
