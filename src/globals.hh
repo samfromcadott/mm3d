@@ -20,3 +20,4 @@ extern Texture2D grass;
 
 extern Player player;
 extern Hill hill;
+extern Camera3D camera;

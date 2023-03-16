@@ -13,6 +13,12 @@ void Player::update() {
 	steer();
 	position = Vector3Add(position, {0.0, 4.0f*GetFrameTime(), 0.0});
 	position.z = hill.get_height(position.y) + height;
+
+	// Update camera
+	camera.position = position;
+	float target_height = hill.get_height(position.y + 8.0) + height;
+	Vector3 target = {position.x, position.y+8.0f, target_height};
+	camera.target = Vector3Scale( Vector3Add(position, target), 0.5 );
 }
 
 void Player::steer() {
