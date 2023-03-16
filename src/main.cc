@@ -56,6 +56,9 @@ int main() {
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
+	player = Player();
+	hill = Hill();
+
 	// Main game loop
 	while ( !WindowShouldClose() ) {
 		// Update

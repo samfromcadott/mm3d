@@ -97,6 +97,11 @@ float Hill::get_height(float y) {
 	return z;
 }
 
+float Hill::get_slope(int i) {
+	Segment& s = segments[i];
+	return (s.start.z - s.end.z) / segment_length;
+}
+
 int Hill::current_segment() {
 	return int(player.position.y / segment_length);
 }
