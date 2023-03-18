@@ -1,9 +1,11 @@
 #pragma once
 
+#include <vector>
 #include <raylib.h>
 
 class Player;
 class Hill;
+class Thing;
 
 const Color sky_color = {106, 173, 253, 255};
 
@@ -21,3 +23,4 @@ extern Texture2D grass;
 extern Player player;
 extern Hill hill;
 extern Camera3D camera;
+extern std::vector<Thing> things;

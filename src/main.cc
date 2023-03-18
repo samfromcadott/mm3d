@@ -1,3 +1,4 @@
+#include <vector>
 #include <raylib.h>
 #include <rlgl.h>
 #include <raymath.h>
@@ -5,6 +6,7 @@
 #include "globals.hh"
 #include "player.hh"
 #include "hill.hh"
+#include "thing.hh"
 
 Texture2D background;
 Texture2D gravel;
@@ -14,6 +16,7 @@ Texture2D grass;
 Player player;
 Hill hill;
 Camera3D camera;
+std::vector<Thing> things;
 
 int main() {
 	// Initialization
@@ -59,6 +62,8 @@ int main() {
 	player = Player();
 	hill = Hill();
 
+	things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
+
 	// Main game loop
 	while ( !WindowShouldClose() ) {
 		// Update
@@ -78,6 +83,9 @@ int main() {
 			BeginMode3D(camera);
 				// DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
 				hill.render();
+				for(Thing& thing : things) {
+					thing.render();
+				}
 			EndMode3D();
 		EndTextureMode();
 
