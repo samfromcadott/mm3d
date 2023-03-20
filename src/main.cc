@@ -71,6 +71,9 @@ int main() {
 		hill.update();
 		// camera.position = player.position;
 		// camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
+		for (Thing& thing : things) {
+			thing.update();
+		}
 
 		// Draw
 		BeginTextureMode(render_target);
@@ -83,7 +86,7 @@ int main() {
 			BeginMode3D(camera);
 				// DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
 				hill.render();
-				for(Thing& thing : things) {
+				for (Thing& thing : things) {
 					thing.render();
 				}
 			EndMode3D();

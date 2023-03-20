@@ -1,7 +1,10 @@
+#include <iostream>
 #include <raylib.h>
 #include <raymath.h>
 
 #include "thing.hh"
+#include "globals.hh"
+#include "player.hh"
 
 Thing::Thing(Vector3 position, Vector3 velocity, float radius, float height) {
 	this->position = position;
@@ -21,9 +24,13 @@ void Thing::render() {
 }
 
 void Thing::update() {
-
+	if ( collide() )
+		std::cout << "Player died" << '\n';
 }
 
 bool Thing::collide() {
+	float dist = Vector2Distance( {player.position.x, player.position.y}, {position.x, position.y} );
+	if (dist < radius) return true;
 
+	return false;
 }
