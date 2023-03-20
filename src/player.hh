@@ -10,10 +10,12 @@ private:
 	float max_speed = 30.0;
 
 	void steer();
+	void dead_update();
 
 public:
 	Vector3 position;
 	float speed;
+	bool dead;
 
 	void update();
 

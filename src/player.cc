@@ -9,6 +9,7 @@
 Player::Player() {
 	position = {-hill.road_width/2.0f, 0.0, height};
 	speed = 4.0;
+	dead = false;
 }
 
 void Player::update() {
@@ -19,8 +20,12 @@ void Player::update() {
 	float friction = 5.0 * GetFrameTime();
 	float acceleration = 9.0 * GetFrameTime();
 
-	speed += (slope * acceleration) - friction;
-	speed = Clamp(speed, min_speed, max_speed);
+	if (dead) {
+		dead_update();
+	} else {
+		speed += (slope * acceleration) - friction;
+		speed = Clamp(speed, min_speed, max_speed);
+	}
 
 	const Segment& s = hill.segments[ hill.current_segment() ];
 	Vector3 direction = Vector3Subtract(s.end, s.start);
@@ -41,9 +46,22 @@ void Player::update() {
 }
 
 void Player::steer() {
+	if (dead) return;
 	if ( IsKeyDown(KEY_LEFT) ) position.x -= steer_speed * GetFrameTime();
 	if ( IsKeyDown(KEY_RIGHT) ) position.x += steer_speed * GetFrameTime();
 
 	if (position.x < -hill.road_width) position.x = -hill.road_width;
 	if (position.x > 0) position.x = 0;
+}
+
+void Player::dead_update() {
+	if (!dead) return;
+	if (height > 0.1)
+		height -= 0.02;
+
+	if (speed > 0)
+		speed -= 0.02;
+
+	if (speed < 0)
+		speed = 0;
 }

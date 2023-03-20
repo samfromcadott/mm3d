@@ -25,7 +25,7 @@ void Thing::render() {
 
 void Thing::update() {
 	if ( collide() )
-		std::cout << "Player died" << '\n';
+		player.dead = true;
 }
 
 bool Thing::collide() {
