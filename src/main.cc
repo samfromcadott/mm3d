@@ -69,8 +69,6 @@ int main() {
 		// Update
 		player.update();
 		hill.update();
-		// camera.position = player.position;
-		// camera.target = Vector3Add(camera.position, {0.0, 1.0, 0.0});
 		for (Thing& thing : things) {
 			thing.update();
 		}
