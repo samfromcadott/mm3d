@@ -7,6 +7,7 @@
 #include "hill.hh"
 
 Player::Player() {
+	height = 1.5;
 	position = {-hill.road_width/2.0f, 0.0, height};
 	speed = 4.0;
 	dead = false;
@@ -57,7 +58,7 @@ void Player::steer() {
 void Player::dead_update() {
 	if (!dead) return;
 	if (height > 0.1)
-		height -= 0.02;
+		height -= 0.04;
 
 	if (speed > 0)
 		speed -= 0.02;

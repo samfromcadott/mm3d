@@ -18,6 +18,8 @@ Hill hill;
 Camera3D camera;
 std::vector<Thing> things;
 
+void start_game();
+
 int main() {
 	// Initialization
 	const float virtual_ratio = (float)screen_width/(float)screen_width_internal;
@@ -59,10 +61,7 @@ int main() {
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
-	player = Player();
-	hill = Hill();
-
-	things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
+	start_game();
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
@@ -72,6 +71,8 @@ int main() {
 		for (Thing& thing : things) {
 			thing.update();
 		}
+
+		if ( IsKeyPressed(KEY_R) && player.dead ) start_game();
 
 		// Draw
 		BeginTextureMode(render_target);
@@ -103,4 +104,12 @@ int main() {
 	CloseWindow();
 
 	return 0;
+}
+
+void start_game() {
+	player = Player();
+	hill = Hill();
+
+	things.clear();
+	things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
 }
