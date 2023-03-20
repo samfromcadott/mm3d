@@ -78,12 +78,15 @@ int main() {
 		BeginTextureMode(render_target);
 			// Draw the background
 			ClearBackground(sky_color);
-			int background_offset = Lerp( 0, -background.height, hill.get_slope(hill.current_segment()) );
-			DrawTexture(background, 0, background_offset/2, WHITE);
-
+			int background_offset = Lerp(
+				0,
+				background.height,
+				Vector3Normalize( Vector3Subtract(camera.target, camera.position) ).z
+			);
+			DrawTexture(background, 0, background_offset, WHITE);
 
 			BeginMode3D(camera);
-				// DrawCube({0.0,0.0,0.0}, 2.0f, 2.0f, 2.0f, RED);
+				// DrawCube({0.0,30.0,-1.0}, 2.0f, 2.0f, 2.0f, RED);
 				hill.render();
 				for (Thing& thing : things) {
 					thing.render();
@@ -111,5 +114,6 @@ void start_game() {
 	hill = Hill();
 
 	things.clear();
-	things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
+	// things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
+	// things.push_back( Thing( {-3,30,0}, {0,0,0}, 0.5, 2.0 ) );
 }

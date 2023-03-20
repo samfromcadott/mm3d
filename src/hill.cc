@@ -7,6 +7,7 @@
 #include "globals.hh"
 #include "hill.hh"
 #include "player.hh"
+#include "thing.hh"
 
 Hill::Hill() {
 	segments = { {{0.0, 0.0, 0.0}, {0.0, segment_length, 0.0}} };
@@ -69,6 +70,7 @@ void Hill::render_segment(Segment& s) {
 }
 
 void Hill::render() {
+	rlPushMatrix();
 	rlBegin(RL_QUADS);
 		rlColor4f(1.0, 1.0, 1.0, 1.0);
 		for (size_t i = current_segment(); i < current_segment()+look_ahead; i++) {
@@ -76,6 +78,7 @@ void Hill::render() {
 			render_segment( s );
 		}
 	rlEnd();
+	rlPopMatrix();
 
 	rlSetTexture(0);
 }
@@ -88,7 +91,7 @@ void Hill::update() {
 
 
 float Hill::get_height(float y) {
-	int index = current_segment(); // Index of current segment
+	int index = int(y / segment_length);
 	Segment& s = segments[index];
 	float t = (y - index * segment_length) / segment_length; // Proportional distance to next segment
 
@@ -107,9 +110,30 @@ int Hill::current_segment() {
 }
 
 void Hill::add_segment() {
+	// Add the segment
 	Segment new_segment;
 	new_segment.start = segments.back().end;
 	float drop = -GetRandomValue(0, segment_length);
 	new_segment.end = Vector3Add(new_segment.start, {0.0, segment_length, drop});
 	segments.push_back(new_segment);
+
+	// Add things
+	Thing new_thing = Thing(
+		{ 0, new_segment.start.y+1.0f, 0 },
+		{0,0,0},
+		0.5,
+		2.0
+	);
+	new_thing.position.z = get_height(new_thing.position.y);
+	things.push_back(new_thing);
+	// for (int i=0; i < int(segment_length); i++) {
+	// 	Thing new_thing = Thing(
+	// 		{ 0, new_segment.start.y+float(i), 0 },
+	// 		{0,0,0},
+	// 		0.5,
+	// 		2.0
+	// 	);
+	// 	new_thing.position.z = get_height(new_thing.position.y);
+	// 	things.push_back(new_thing);
+	// }
 }

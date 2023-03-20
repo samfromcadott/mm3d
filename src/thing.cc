@@ -1,10 +1,12 @@
 #include <iostream>
 #include <raylib.h>
 #include <raymath.h>
+#include <rlgl.h>
 
 #include "thing.hh"
 #include "globals.hh"
 #include "player.hh"
+#include "hill.hh"
 
 Thing::Thing(Vector3 position, Vector3 velocity, float radius, float height) {
 	this->position = position;
@@ -24,6 +26,7 @@ void Thing::render() {
 }
 
 void Thing::update() {
+	position.z = hill.get_height(position.y);
 	if ( collide() )
 		player.dead = true;
 }
