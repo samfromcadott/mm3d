@@ -110,10 +110,7 @@ int main() {
 }
 
 void start_game() {
-	player = Player();
-	hill = Hill();
-
 	things.clear();
-	// things.push_back( Thing( {-3,5,0}, {0,0,0}, 0.5, 2.0 ) );
-	// things.push_back( Thing( {-3,30,0}, {0,0,0}, 0.5, 2.0 ) );
+	player = Player();
+	hill = Hill();	
 }

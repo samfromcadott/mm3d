@@ -18,6 +18,7 @@ public:
 	bool dead;
 
 	void update();
+	void die();
 
 	Player();
 };

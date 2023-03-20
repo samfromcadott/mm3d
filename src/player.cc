@@ -18,7 +18,7 @@ void Player::update() {
 
 	// Determine velocity
 	float slope = hill.get_slope( hill.current_segment() );
-	float friction = 5.0 * GetFrameTime();
+	float friction = 3.5 * GetFrameTime();
 	float acceleration = 9.0 * GetFrameTime();
 
 	if (dead) {
@@ -54,6 +54,11 @@ void Player::steer() {
 
 	if (position.x < -hill.road_width) position.x = -hill.road_width;
 	if (position.x > 0) position.x = 0;
+}
+
+void Player::die() {
+	player.dead = true;
+	player.speed = player.min_speed;
 }
 
 void Player::dead_update() {

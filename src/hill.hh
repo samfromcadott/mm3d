@@ -15,6 +15,7 @@ private:
 
 	void render_segment(Segment& s);
 	void add_segment();
+	void add_thing(float y);
 
 public:
 	std::vector<Segment> segments;

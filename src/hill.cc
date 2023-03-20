@@ -126,14 +126,26 @@ void Hill::add_segment() {
 	);
 	new_thing.position.z = get_height(new_thing.position.y);
 	things.push_back(new_thing);
-	// for (int i=0; i < int(segment_length); i++) {
-	// 	Thing new_thing = Thing(
-	// 		{ 0, new_segment.start.y+float(i), 0 },
-	// 		{0,0,0},
-	// 		0.5,
-	// 		2.0
-	// 	);
-	// 	new_thing.position.z = get_height(new_thing.position.y);
-	// 	things.push_back(new_thing);
-	// }
+	for (int i=1; i < int(segment_length); i++) {
+		if ( GetRandomValue(0, 5) == 0 )
+			add_thing( new_segment.start.y+float(i) );
+		// Thing new_thing = Thing(
+		// 	{ 0, new_segment.start.y+float(i), 0 },
+		// 	{0,0,0},
+		// 	0.5,
+		// 	2.0
+		// );
+		// new_thing.position.z = get_height(new_thing.position.y);
+		// things.push_back(new_thing);
+	}
+}
+
+void Hill::add_thing(float y) {
+	Thing new_thing = Thing(
+		{ (float)GetRandomValue(grass_width, -road_width-grass_width), y, 0 },
+		{0,0,0},
+		0.5,
+		2.0
+	);
+	things.push_back(new_thing);
 }

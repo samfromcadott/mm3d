@@ -27,8 +27,7 @@ void Thing::render() {
 
 void Thing::update() {
 	position.z = hill.get_height(position.y);
-	if ( collide() )
-		player.dead = true;
+	if ( collide() && !player.dead ) player.die();
 }
 
 bool Thing::collide() {
