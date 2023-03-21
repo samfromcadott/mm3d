@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include <raylib.h>
 #include <rlgl.h>
 #include <raymath.h>
@@ -68,8 +69,12 @@ int main() {
 		// Update
 		player.update();
 		hill.update();
-		for (Thing& thing : things) {
-			thing.update();
+		for ( auto it = things.begin(); it != things.end(); ) {
+			it->update();
+
+			// Erase objects behind the player
+			if ( it->position.y < player.position.y ) it = things.erase(it);
+			else ++it;
 		}
 
 		if ( IsKeyPressed(KEY_R) && player.dead ) start_game();
@@ -86,10 +91,9 @@ int main() {
 			DrawTexture(background, 0, background_offset, WHITE);
 
 			BeginMode3D(camera);
-				// DrawCube({0.0,30.0,-1.0}, 2.0f, 2.0f, 2.0f, RED);
 				hill.render();
-				for (Thing& thing : things) {
-					thing.render();
+				for ( auto it = things.rbegin(); it != things.rend(); ++it ) { // Things are rendered back to front
+					it->render();
 				}
 			EndMode3D();
 		EndTextureMode();
