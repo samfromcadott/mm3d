@@ -18,7 +18,7 @@ void Player::update() {
 
 	// Determine velocity
 	float slope = hill.get_slope( hill.current_segment() );
-	float friction = 3.5 * GetFrameTime();
+	float friction = 4.0 * GetFrameTime();
 	float acceleration = 9.0 * GetFrameTime();
 
 	if (dead) {

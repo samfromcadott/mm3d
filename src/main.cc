@@ -112,5 +112,5 @@ int main() {
 void start_game() {
 	things.clear();
 	player = Player();
-	hill = Hill();	
+	hill = Hill();
 }

@@ -118,25 +118,9 @@ void Hill::add_segment() {
 	segments.push_back(new_segment);
 
 	// Add things
-	Thing new_thing = Thing(
-		{ 0, new_segment.start.y+1.0f, 0 },
-		{0,0,0},
-		0.5,
-		2.0
-	);
-	new_thing.position.z = get_height(new_thing.position.y);
-	things.push_back(new_thing);
 	for (int i=1; i < int(segment_length); i++) {
-		if ( GetRandomValue(0, 5) == 0 )
+		if ( GetRandomValue(0, 2) == 0 )
 			add_thing( new_segment.start.y+float(i) );
-		// Thing new_thing = Thing(
-		// 	{ 0, new_segment.start.y+float(i), 0 },
-		// 	{0,0,0},
-		// 	0.5,
-		// 	2.0
-		// );
-		// new_thing.position.z = get_height(new_thing.position.y);
-		// things.push_back(new_thing);
 	}
 }
 
