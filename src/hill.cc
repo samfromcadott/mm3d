@@ -119,7 +119,7 @@ void Hill::add_segment() {
 
 	// Add things
 	for (int i=1; i < int(segment_length); i++) {
-		if ( GetRandomValue(0, 2) == 0 )
+		if ( GetRandomValue(0, 5) == 0 )
 			add_thing( new_segment.start.y+float(i) );
 	}
 }
