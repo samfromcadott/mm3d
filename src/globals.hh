@@ -19,6 +19,7 @@ extern Texture2D background;
 extern Texture2D gravel;
 extern Texture2D trees;
 extern Texture2D grass;
+extern Music theme;
 
 extern Player player;
 extern Hill hill;

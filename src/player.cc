@@ -59,6 +59,8 @@ void Player::steer() {
 void Player::die() {
 	player.dead = true;
 	player.speed = player.min_speed;
+
+	StopMusicStream(theme);
 }
 
 void Player::dead_update() {

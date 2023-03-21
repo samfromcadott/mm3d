@@ -13,6 +13,7 @@ Texture2D background;
 Texture2D gravel;
 Texture2D trees;
 Texture2D grass;
+Music theme;
 
 Player player;
 Hill hill;
@@ -26,6 +27,7 @@ int main() {
 	const float virtual_ratio = (float)screen_width/(float)screen_width_internal;
 
 	InitWindow(screen_width, screen_height, "Mountain Mayhem 3D");
+	InitAudioDevice();
 
 	Camera2D worldSpaceCamera = { 0 };  // Game world camera
 	worldSpaceCamera.zoom = 1.0f;
@@ -62,10 +64,15 @@ int main() {
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
+	// Load audio
+	theme = LoadMusicStream("assets/audio/theme.mp3");
+
 	start_game();
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
+		UpdateMusicStream(theme);
+
 		// Update
 		player.update();
 		hill.update();
@@ -107,7 +114,9 @@ int main() {
 	UnloadRenderTexture(render_target); // Unload render texture
 	UnloadTexture(background);
 	UnloadTexture(gravel);
+	UnloadMusicStream(theme);
 
+	CloseAudioDevice();
 	CloseWindow();
 
 	return 0;
@@ -117,4 +126,7 @@ void start_game() {
 	things.clear();
 	player = Player();
 	hill = Hill();
+
+	StopMusicStream(theme);
+	PlayMusicStream(theme);
 }
