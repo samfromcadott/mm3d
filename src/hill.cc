@@ -125,11 +125,26 @@ void Hill::add_segment() {
 }
 
 void Hill::add_thing(float y) {
-	Thing new_thing = Thing(
-		{ (float)GetRandomValue(1, -road_width-1), y, 0 },
-		{0,0,0},
-		0.5,
-		2.0
-	);
+	Thing new_thing;
+
+	Vector3 position = { (float)GetRandomValue(1, -road_width-1), y, 0 };
+	Vector3 velocity = {0,0,0};
+
+	// Choose what thing is placed
+	int choice = GetRandomValue(1, 100);
+	// if ( choice == 1 ) {
+	// 	position.y = 256;
+	// 	velocity.y = -5.0;
+	// 	new_thing = Thing(&bigfoot_sprite, position, velocity, 32, 32);
+	// }
+	// Rock
+	if (choice >= 1 && choice <= 50) {
+		new_thing = Thing(&rock_sprite, position, velocity, 0.125, 0.5);
+	}
+	// Tree
+	else if (choice > 51) {
+		new_thing = Thing(&tree_sprite, position, velocity, 0.5, 2.0);
+	}
+
 	things.push_back(new_thing);
 }

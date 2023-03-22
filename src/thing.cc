@@ -8,7 +8,8 @@
 #include "player.hh"
 #include "hill.hh"
 
-Thing::Thing(Vector3 position, Vector3 velocity, float radius, float height) {
+Thing::Thing(Texture2D* sprite, Vector3 position, Vector3 velocity, float radius, float height) {
+	this->sprite = sprite;
 	this->position = position;
 	this->velocity = velocity;
 	this->radius = radius;
@@ -25,8 +26,8 @@ void Thing::render() {
 	// );
 	DrawBillboardPro(
 		camera,
-		tree_sprite,
-		{ 0, 0, float(tree_sprite.width), float(tree_sprite.height) },
+		*sprite,
+		{ 0, 0, float(sprite->width), float(sprite->height) },
 		Vector3Add( position, {0,0,height} ),
 		up,
 		{radius*8, height*2},

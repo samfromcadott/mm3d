@@ -14,6 +14,7 @@ Texture2D gravel;
 Texture2D trees;
 Texture2D grass;
 Texture2D tree_sprite;
+Texture2D rock_sprite;
 Music theme;
 
 Player player;
@@ -63,6 +64,8 @@ int main() {
 	trees = LoadTexture("assets/graphics/trees.png");
 	grass = LoadTexture("assets/graphics/grass.png");
 	tree_sprite = LoadTexture("assets/graphics/tree_sprite.png");
+	rock_sprite = LoadTexture("assets/graphics/rock_sprite.png");
+
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
@@ -118,6 +121,7 @@ int main() {
 	UnloadTexture(gravel);
 	UnloadTexture(grass);
 	UnloadTexture(tree_sprite);
+	UnloadTexture(rock_sprite);
 	UnloadMusicStream(theme);
 
 	CloseAudioDevice();
