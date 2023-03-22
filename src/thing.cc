@@ -16,12 +16,23 @@ Thing::Thing(Vector3 position, Vector3 velocity, float radius, float height) {
 }
 
 void Thing::render() {
-	DrawCylinderWiresEx(
-		position,
-		Vector3Add(position, {0, 0, height}),
-		radius, radius,
-		8,
-		MAGENTA
+	// DrawCylinderWiresEx(
+	// 	position,
+	// 	Vector3Add(position, {0, 0, height}),
+	// 	radius, radius,
+	// 	8,
+	// 	MAGENTA
+	// );
+	DrawBillboardPro(
+		camera,
+		tree_sprite,
+		{ 0, 0, float(tree_sprite.width), float(tree_sprite.height) },
+		Vector3Add( position, {0,0,height} ),
+		up,
+		{radius*8, height*2},
+		{0, 0},
+		0.0,
+		WHITE
 	);
 }
 

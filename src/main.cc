@@ -13,6 +13,7 @@ Texture2D background;
 Texture2D gravel;
 Texture2D trees;
 Texture2D grass;
+Texture2D tree_sprite;
 Music theme;
 
 Player player;
@@ -41,7 +42,7 @@ int main() {
 	camera.target = (Vector3){ -2.0, 0.0, 0.0 };      // Camera looking at point
 	// camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
 	// camera.target = (Vector3){ -2.0, 1.0, 1.5 };     // Camera looking at point
-	camera.up = (Vector3){ 0.0, 0.0, 1.0 };          // Camera up vector (rotation towards target)
+	camera.up = up;          // Camera up vector (rotation towards target)
 	camera.fovy = 90.0;                                // Camera field-of-view Y
 	camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
@@ -61,6 +62,7 @@ int main() {
 	gravel = LoadTexture("assets/graphics/road.png");
 	trees = LoadTexture("assets/graphics/trees.png");
 	grass = LoadTexture("assets/graphics/grass.png");
+	tree_sprite = LoadTexture("assets/graphics/tree_sprite.png");
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
 
@@ -114,6 +116,8 @@ int main() {
 	UnloadRenderTexture(render_target); // Unload render texture
 	UnloadTexture(background);
 	UnloadTexture(gravel);
+	UnloadTexture(grass);
+	UnloadTexture(tree_sprite);
 	UnloadMusicStream(theme);
 
 	CloseAudioDevice();

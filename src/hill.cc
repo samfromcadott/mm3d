@@ -126,7 +126,7 @@ void Hill::add_segment() {
 
 void Hill::add_thing(float y) {
 	Thing new_thing = Thing(
-		{ (float)GetRandomValue(grass_width, -road_width-grass_width), y, 0 },
+		{ (float)GetRandomValue(1, -road_width-1), y, 0 },
 		{0,0,0},
 		0.5,
 		2.0
