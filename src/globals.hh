@@ -25,6 +25,7 @@ extern Texture2D tree_sprite;
 extern Texture2D rock_sprite;
 extern Texture2D bigfoot_sprite;
 extern Music theme;
+extern Sound explosion_sound;
 
 extern Player player;
 extern Hill hill;

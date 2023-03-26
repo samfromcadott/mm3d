@@ -17,6 +17,7 @@ Texture2D tree_sprite;
 Texture2D rock_sprite;
 Texture2D bigfoot_sprite;
 Music theme;
+Sound explosion_sound;
 
 Player player;
 Hill hill;
@@ -73,6 +74,7 @@ int main() {
 
 	// Load audio
 	theme = LoadMusicStream("assets/audio/theme.mp3");
+	explosion_sound = LoadSound("assets/audio/explosion.wav");
 
 	start_game();
 
@@ -126,6 +128,7 @@ int main() {
 	UnloadTexture(rock_sprite);
 	UnloadTexture(bigfoot_sprite);
 	UnloadMusicStream(theme);
+	UnloadSound(explosion_sound);
 
 	CloseAudioDevice();
 	CloseWindow();

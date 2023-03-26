@@ -60,6 +60,7 @@ void Player::die() {
 	player.dead = true;
 	player.speed = player.min_speed;
 
+	PlaySound(explosion_sound);
 	StopMusicStream(theme);
 }
 
