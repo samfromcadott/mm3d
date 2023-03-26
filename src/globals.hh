@@ -23,6 +23,7 @@ extern Texture2D trees;
 extern Texture2D grass;
 extern Texture2D tree_sprite;
 extern Texture2D rock_sprite;
+extern Texture2D bigfoot_sprite;
 extern Music theme;
 
 extern Player player;

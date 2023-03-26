@@ -17,6 +17,20 @@ Thing::Thing(Texture2D* sprite, Vector3 position, Vector3 velocity, float radius
 }
 
 void Thing::render() {
+	Rectangle rect;
+
+	// If the object is Bigfoot
+	if (sprite == &bigfoot_sprite) {
+		const float rate = 8; // Frame rate of animation
+		const int length = 8; // Length (in frames) of the animation
+
+		const float frame = int( GetTime() * rate ) % length; // Current frame
+
+		rect = { frame * 64, 0, 64, 64 };
+	} else {
+		rect = { 0, 0, float(sprite->width), float(sprite->height) };
+	}
+
 	// DrawCylinderWiresEx(
 	// 	position,
 	// 	Vector3Add(position, {0, 0, height}),
@@ -24,10 +38,11 @@ void Thing::render() {
 	// 	8,
 	// 	MAGENTA
 	// );
+
 	DrawBillboardPro(
 		camera,
 		*sprite,
-		{ 0, 0, float(sprite->width), float(sprite->height) },
+		rect,
 		Vector3Add( position, {0,0,height} ),
 		up,
 		{radius*8, height*2},
@@ -38,7 +53,7 @@ void Thing::render() {
 }
 
 void Thing::update() {
-	position.z = hill.get_height(position.y);
+	position = Vector3Add( position, Vector3Scale( velocity, GetFrameTime() ) );
 	if ( collide() && !player.dead ) player.die();
 }
 

@@ -132,19 +132,21 @@ void Hill::add_thing(float y) {
 
 	// Choose what thing is placed
 	int choice = GetRandomValue(1, 100);
-	// if ( choice == 1 ) {
-	// 	position.y = 256;
-	// 	velocity.y = -5.0;
-	// 	new_thing = Thing(&bigfoot_sprite, position, velocity, 32, 32);
-	// }
+	if ( choice == 1 ) {
+		position.x = -road_width-grass_width;
+		velocity.x = 2.0;
+		new_thing = Thing(&bigfoot_sprite, position, velocity, 0.25, 1.0);
+	}
 	// Rock
-	if (choice >= 1 && choice <= 50) {
+	if (choice > 1 && choice < 50) {
 		new_thing = Thing(&rock_sprite, position, velocity, 0.125, 0.5);
 	}
 	// Tree
-	else if (choice > 51) {
+	else if (choice >= 50) {
 		new_thing = Thing(&tree_sprite, position, velocity, 0.5, 2.0);
 	}
+
+	new_thing.position.z = get_height(new_thing.position.y);
 
 	things.push_back(new_thing);
 }
