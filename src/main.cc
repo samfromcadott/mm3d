@@ -9,6 +9,8 @@
 #include "hill.hh"
 #include "thing.hh"
 
+float timer; // Time current run has lasted
+
 Texture2D background;
 Texture2D gravel;
 Texture2D trees;
@@ -80,7 +82,14 @@ int main() {
 
 	// Main game loop
 	while ( !WindowShouldClose() ) {
+		timer += GetFrameTime();
+
+		// Update music
 		UpdateMusicStream(theme);
+
+		float volume = Lerp(0.0, 1.0, timer); // Fade in music at start
+		volume = Clamp(volume, 0.0, 1.0);
+		SetMusicVolume(theme, volume);
 
 		// Update
 		player.update();
@@ -137,6 +146,8 @@ int main() {
 }
 
 void start_game() {
+	timer = 0.0;
+
 	things.clear();
 	player = Player();
 	hill = Hill();
