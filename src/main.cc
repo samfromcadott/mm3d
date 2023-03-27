@@ -38,25 +38,20 @@ int main() {
 	Camera2D worldSpaceCamera = { 0 };  // Game world camera
 	worldSpaceCamera.zoom = 1.0f;
 
-	Camera2D screenSpaceCamera = { 0 }; // Smoothing camera
-	screenSpaceCamera.zoom = 1.0f;
-
-	// Define the camera to look into our 3d world
+	// Camera setup
 	camera = { 0 };
-	camera.position = (Vector3){ -2.0, -8.0, 8.0 };  // Camera position
-	camera.target = (Vector3){ -2.0, 0.0, 0.0 };      // Camera looking at point
-	// camera.position = (Vector3){ -2.0, 0.0, 1.5 };  // Camera position
-	// camera.target = (Vector3){ -2.0, 1.0, 1.5 };     // Camera looking at point
-	camera.up = up;          // Camera up vector (rotation towards target)
-	camera.fovy = 90.0;                                // Camera field-of-view Y
-	camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
+	camera.position = (Vector3){ -2.0, -8.0, 8.0 };
+	camera.target = (Vector3){ -2.0, 0.0, 0.0 };
+	camera.up = up;
+	camera.fovy = 90.0;
+	camera.projection = CAMERA_PERSPECTIVE;
 
 	// Create the render texture
 	RenderTexture2D render_target = LoadRenderTexture(screen_width_internal, screen_height_internal);
 
 	// The target's height is flipped (in the source Rectangle), due to OpenGL reasons
-	Rectangle sourceRec = { 0.0f, 0.0f, (float)render_target.texture.width, -(float)render_target.texture.height };
-	Rectangle destRec = { -virtual_ratio, -virtual_ratio, screen_width + (virtual_ratio*2), screen_height + (virtual_ratio*2) };
+	Rectangle source_rect = { 0.0f, 0.0f, (float)render_target.texture.width, -(float)render_target.texture.height };
+	Rectangle dest_rect = { -virtual_ratio, -virtual_ratio, screen_width + (virtual_ratio*2), screen_height + (virtual_ratio*2) };
 
 	Vector2 origin = { 0.0f, 0.0f };
 
@@ -124,7 +119,7 @@ int main() {
 		EndTextureMode();
 
 		BeginDrawing();
-			DrawTexturePro(render_target.texture, sourceRec, destRec, origin, 0.0f, WHITE);
+			DrawTexturePro(render_target.texture, source_rect, dest_rect, origin, 0.0f, WHITE);
 		EndDrawing();
 	}
 
