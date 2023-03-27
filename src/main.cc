@@ -20,12 +20,14 @@ Texture2D rock_sprite;
 Texture2D bigfoot_sprite;
 Music theme;
 Sound explosion_sound;
+Font font;
 
 Player player;
 Hill hill;
 Camera3D camera;
 std::vector<Thing> things;
 
+void display_score();
 void start_game();
 
 int main() {
@@ -74,6 +76,10 @@ int main() {
 	theme = LoadMusicStream("assets/audio/theme.mp3");
 	explosion_sound = LoadSound("assets/audio/explosion.wav");
 
+	// Load the font
+	font = LoadFontEx("assets/SpaceMadness.ttf", 128, NULL, 0);
+	SetTextureFilter(font.texture, TEXTURE_FILTER_POINT);
+
 	start_game();
 
 	// Main game loop
@@ -117,6 +123,8 @@ int main() {
 					it->render();
 				}
 			EndMode3D();
+
+			display_score();
 		EndTextureMode();
 
 		BeginDrawing();
@@ -134,11 +142,36 @@ int main() {
 	UnloadTexture(bigfoot_sprite);
 	UnloadMusicStream(theme);
 	UnloadSound(explosion_sound);
+	UnloadFont(font);
 
 	CloseAudioDevice();
 	CloseWindow();
 
 	return 0;
+}
+
+void display_score() {
+	const Vector2 text_offset = {4, 2};
+	const Vector2 shadow_offset = Vector2AddValue(text_offset, 1.0);
+	const int text_size = 12;
+
+	DrawTextEx( // Shadow
+		font,
+		TextFormat("%09.0fm", player.position.y),
+		shadow_offset,
+		text_size,
+		1,
+		BLACK
+	);
+
+	DrawTextEx(
+		font,
+		TextFormat("%09.0fm", player.position.y),
+		text_offset,
+		text_size,
+		1,
+		WHITE
+	);
 }
 
 void start_game() {
