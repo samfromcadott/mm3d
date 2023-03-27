@@ -56,6 +56,7 @@ int main() {
 	Vector2 origin = { 0.0f, 0.0f };
 
 	SetTargetFPS(60);
+	HideCursor();
 
 	// Load the textures
 	background = LoadTexture("assets/graphics/mountain.png");
