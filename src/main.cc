@@ -49,7 +49,6 @@ int main() {
 	// Create the render texture
 	RenderTexture2D render_target = LoadRenderTexture(screen_width_internal, screen_height_internal);
 
-	// The target's height is flipped (in the source Rectangle), due to OpenGL reasons
 	Rectangle source_rect = { 0.0f, 0.0f, (float)render_target.texture.width, -(float)render_target.texture.height };
 	Rectangle dest_rect = { -virtual_ratio, -virtual_ratio, screen_width + (virtual_ratio*2), screen_height + (virtual_ratio*2) };
 
@@ -57,6 +56,7 @@ int main() {
 
 	SetTargetFPS(60);
 	HideCursor();
+	SetWindowIcon( LoadImage("assets/graphics/icon.png") );
 
 	// Load the textures
 	background = LoadTexture("assets/graphics/mountain.png");
