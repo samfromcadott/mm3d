@@ -5,7 +5,7 @@ LIBS=['raylib', 'opengl32', 'gdi32', 'winmm']
 LIBPATH='./lib'
 
 CXXFLAGS='-static --target=x86_64-w64-windows-gnu -std=c++17'
-LINKFLAGS = '--target=x86_64-w64-windows-gnu -static-libgcc -static-libstdc++'
+LINKFLAGS = '--target=x86_64-w64-windows-gnu -static-libgcc -static-libstdc++ -mwindows'
 
 VariantDir('build', 'src', duplicate=False)
 env = Environment(
