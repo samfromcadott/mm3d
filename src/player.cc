@@ -41,7 +41,7 @@ void Player::update() {
 
 	// Update camera
 	camera.position = position;
-	float target_distance = 1.5;
+	float target_distance = 64.0 * GetFrameTime();
 	float target_height = hill.get_height(position.y + target_distance) + height;
 	Vector3 target = {position.x, position.y+target_distance, target_height};
 	camera.target = target;
@@ -67,10 +67,10 @@ void Player::die() {
 void Player::dead_update() {
 	if (!dead) return;
 	if (height > 0.1)
-		height -= 0.04;
+		height -= 2.4 * GetFrameTime();
 
 	if (speed > 0)
-		speed -= 0.02;
+		speed -= 1.2 * GetFrameTime();
 
 	if (speed < 0)
 		speed = 0;
