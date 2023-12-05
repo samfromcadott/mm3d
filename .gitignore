@@ -6,3 +6,4 @@ include
 *.o
 .sconsign.dblite
 *.zip
+output

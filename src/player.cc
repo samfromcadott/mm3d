@@ -41,7 +41,8 @@ void Player::update() {
 
 	// Update camera
 	camera.position = position;
-	float target_distance = 64.0 * GetFrameTime();
+	// float target_distance = 128.0 * GetFrameTime();
+	float target_distance = 1.5;
 	float target_height = hill.get_height(position.y + target_distance) + height;
 	Vector3 target = {position.x, position.y+target_distance, target_height};
 	camera.target = target;

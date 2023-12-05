@@ -50,9 +50,9 @@ void Hill::render_segment(Segment& s) {
 
 	// Trees
 	rlSetTexture(trees.id);
-	rlTexCoord2f(2.0, 1.0);
+	rlTexCoord2f(1.0, 1.0);
 	rlVertex3f(-road_width-grass_width, s.end.y, s.end.z);
-	rlTexCoord2f(2.0, 0.0);
+	rlTexCoord2f(1.0, 0.0);
 	rlVertex3f(-road_width-grass_width, s.end.y, s.end.z+tree_height);
 	rlTexCoord2f(0.0, 0.0);
 	rlVertex3f(-road_width-grass_width, s.start.y, s.start.z+tree_height);
@@ -63,9 +63,9 @@ void Hill::render_segment(Segment& s) {
 	rlVertex3f(grass_width, s.start.y, s.start.z);
 	rlTexCoord2f(0.0, 0.0);
 	rlVertex3f(grass_width, s.start.y, s.start.z+tree_height);
-	rlTexCoord2f(2.0, 0.0);
+	rlTexCoord2f(1.0, 0.0);
 	rlVertex3f(grass_width, s.end.y, s.end.z+tree_height);
-	rlTexCoord2f(2.0, 1.0);
+	rlTexCoord2f(1.0, 1.0);
 	rlVertex3f(grass_width, s.end.y, s.end.z);
 }
 

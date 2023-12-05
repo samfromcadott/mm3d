@@ -71,6 +71,11 @@ int main() {
 
 	SetTextureWrap(gravel, TEXTURE_WRAP_MIRROR_REPEAT);
 	SetTextureFilter(gravel, TEXTURE_FILTER_POINT);
+	SetTextureWrap(trees, TEXTURE_WRAP_MIRROR_CLAMP);
+	SetTextureFilter(trees, TEXTURE_FILTER_POINT);
+	SetTextureWrap(grass, TEXTURE_WRAP_REPEAT);
+	SetTextureFilter(grass, TEXTURE_FILTER_POINT);
+
 
 	// Load audio
 	theme = LoadMusicStream("assets/audio/theme.mp3");
